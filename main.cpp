@@ -6,7 +6,6 @@
 #include <thread>
 #include <vector>
 #include <functional>
-#include <ctime>
 
 void Consumer( WaitingQueue &waiting, ReadyQueue &ready, Stopper &stopper )
 {
@@ -81,8 +80,8 @@ int main()
    } );
    th.join();
 
-   std::for_each(producers.begin(), producers.end(), [](std::thread &th){ th.join(); });
-   std::for_each(consumers.begin(), consumers.end(), [](std::thread &th){ th.join(); });
+   std::for_each( producers.begin(), producers.end(), [](std::thread &th){ th.join(); } );
+   std::for_each( consumers.begin(), consumers.end(), [](std::thread &th){ th.join(); } );
    return 0;
 }
 
