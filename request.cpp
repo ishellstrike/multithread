@@ -11,9 +11,13 @@ Request *GetRequest( Stopper stopSignal ) throw()
 
 void ProcessRequest( Request *, Stopper stopSignal ) throw()
 {
-   if( stopSignal.isStopRequired() )
-      return;
-   std::this_thread::sleep_for( std::chrono::milliseconds( rand() % 1000 ) );
+   for( int i = 0; i < 10; ++i )
+   {
+      if( stopSignal.isStopRequired() ) // досрочное прерывание обработки, в реальном примере может быть реализовано наподобие точек прерывания
+         return;
+
+      std::this_thread::sleep_for( std::chrono::milliseconds( rand() % 100 ) );
+   }
 }
 
 
